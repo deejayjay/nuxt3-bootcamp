@@ -13,6 +13,12 @@
       <div class="bg-black bg-opacity-75 absolute inset-0 flex justify-center items-center">
         <div class="text-center w-50">
           <h2 class="text-8xl font-sans mb-10 text-white">Find your drive</h2>
+          <!-- HOME SEARCH BAR START -->
+          <form class="font-sans w-[1000px] text-2xl rounded-full bg-white flex justify-between overflow-hidden drop-shadow-2xl mx-auto">
+            <input type="text" class="py-3 px-5 w-full text-2xl rounded-full focus:outline-none" placeholder="Search by city..." />
+            <button type="submit" class="bg-sky-500 px-10 text-white">Search</button>
+          </form>
+          <!-- HOME SEARCH BAR END -->
         </div>
       </div>
     </div>
