@@ -4,13 +4,10 @@ definePageMeta({
 });
 
 const $route = useRoute();
+const { capitalize } = useUtils();
 useHead({
-  title: capitalize($route.params.name)
+  title: `Car details - ${capitalize($route.params.name)}`
 });
-
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 </script>
 
 <template>
