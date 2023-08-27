@@ -14,6 +14,13 @@ useHead({
 const car = computed(() => {
   return cars.find(c => c.id === parseInt($route.params.id));
 })
+
+if (!car.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: `Car with id ${$route.params.id} does not exist`
+  });
+}
 </script>
 
 <template>
