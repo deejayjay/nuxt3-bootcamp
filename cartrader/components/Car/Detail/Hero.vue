@@ -25,9 +25,9 @@ const props = defineProps({
 
 <template>
   <div class="mt-10">
-    <img :src="imageUrl"
-         :alt="name"
-         class="w-full" />
+    <NuxtImg :src="imageUrl"
+             :alt="name"
+             class="w-full" />
     <h2 class="mt-10 text-4xl">{{ name }}</h2>
     <div class="text-slate-500 flex justify-between text-lg mt-3 border-b pb-5">
       <div class="flex">
