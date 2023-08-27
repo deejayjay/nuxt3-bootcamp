@@ -1,5 +1,5 @@
 <template>
-  <nav class="shadow border w-64 mr-10 z-30 h-[190px]">
+  <nav class="shadow border w-96 mr-10 z-30 h-[190px]">
     <div class="p-5 flex justify-between relative cursor-pointer border-b">
       <h3 class="font-medium">Location</h3>
       <p class="text-blue-400 capitalize">Ottawa</p>

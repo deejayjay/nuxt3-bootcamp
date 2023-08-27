@@ -1,8 +1,14 @@
+<script setup>
+const props = defineProps({
+  description: {
+    type: String,
+    required: true
+  }
+});
+</script>
+
 <template>
   <div class="mt-5">
-    <p class="mb-10">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, magni non! Quibusdam, pariatur, quod exercitationem praesentium dicta ab soluta saepe earum rerum dolore odit explicabo ullam
-      placeat, neque qui tenetur!
-    </p>
+    <p class="mb-10">{{ description }}</p>
   </div>
 </template>
