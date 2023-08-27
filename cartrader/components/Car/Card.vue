@@ -1,16 +1,29 @@
 <script setup>
+import heartFilled from "@/assets/images/heartFilled.png";
+import heartOutline from "@/assets/images/heartOutline.png";
+
 const props = defineProps({
   car: {
     type: Object,
     required: true
+  },
+  isFavorite: {
+    type: Boolean,
+    required: true
   }
 });
+
+const emit = defineEmits(["onFavoriteToggle"]);
 </script>
 
 <template>
-  <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer h-[200px]"
-       @click="navigateTo(`/car/${car.name}-${car.id}`)">
-    <div class="flex h-full">
+  <div class="relative shadow border w-full overflow-hidden mb-5 cursor-pointer h-[200px]">
+    <img class="absolute w-6 right-5 top-2 z-20"
+         @click="emit('onFavoriteToggle', car.id)"
+         :src="isFavorite ? heartFilled : heartOutline"
+         :alt="!isFavorite ? 'Add to favorite' : 'Remove from favorites'">
+    <div class="flex h-full"
+         @click="navigateTo(`/car/${car.name}-${car.id}`)">
       <NuxtImg :src="car.url"
                :alt="car.name"
                class="w-[300px] h-full" />
