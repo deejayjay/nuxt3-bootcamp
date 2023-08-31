@@ -68,7 +68,7 @@ const inputs = [
     <div class="mt-24">
       <h2 class="text-6xl">Create a New Listing</h2>
     </div>
-    <div class="shadow rounded p-3 mt-5 flex flex-wrap justify-between">
+    <form class="shadow rounded p-3 mt-5 flex flex-wrap justify-between">
       <CarAdSelect title="Make *"
                    name="make"
                    :options="makes"
@@ -83,6 +83,8 @@ const inputs = [
                      name="description"
                      placeholder="Ex: Immaculate 2023 Ford Mustang GT in pristine condition. This high-performance beauty boasts a roaring V8 engine, a sleek midnight blue exterior, and a plush leather interior with all the latest tech features. With low mileage and meticulous maintenance, it's ready to deliver an exhilarating driving experience to its next lucky owner."
                      @change-input="onChangeInput" />
-    </div>
+      <CarAdImage title="Image *"
+                  @change-input="onChangeInput" />
+    </form>
   </div>
 </template>

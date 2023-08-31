@@ -14,7 +14,7 @@ const onChange = () => {
 </script>
 
 <template>
-  <div class="flex flex-col w-[48%] mt-2">
+  <div class="flex flex-col w-[48%] mt-4">
     <label :for="name"
            class="text-cyan-500 mb-1 text-sm">{{ title }}</label>
     <select :name="name"
