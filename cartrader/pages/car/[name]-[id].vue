@@ -3,7 +3,6 @@ definePageMeta({
   layout: 'custom',
 });
 
-const { cars } = useCars();
 const $route = useRoute();
 const { capitalize } = useUtils();
 
@@ -11,9 +10,7 @@ useHead({
   title: `Car details - ${capitalize($route.params.name)}`
 });
 
-const car = computed(() => {
-  return cars.find(c => c.id === parseInt($route.params.id));
-})
+const { data: car } = await useFetchCar($route.params.id);
 
 if (!car.value) {
   throw createError({

@@ -69,7 +69,7 @@ function onPriceSubmit() {
          @click="updateModal('location')">{{ route.params.city }}</p>
       <form v-if="modal.location"
             @submit.prevent="onLocationSubmit"
-            class="absolute border shadow left-56 p-5 top-1 -m-1 bg-white">
+            class="absolute border shadow left-56 p-5 top-1 -m-1 bg-white z-50">
         <input v-model="city"
                type="text"
                class="border p-1 rounded" />
@@ -84,7 +84,7 @@ function onPriceSubmit() {
       <p class="text-blue-400 capitalize"
          @click="updateModal('make')">{{ route.params.make || "Any" }}</p>
       <div v-if="modal.make"
-           class="absolute border shadow left-56 p-5 top-1 -m-1 bg-white w-[600px] flex flex-wrap gap-4">
+           class="absolute border shadow left-56 p-5 top-1 -m-1 bg-white w-[600px] flex flex-wrap gap-4 z-50">
         <button type="submit"
                 class="text-black text-[0.875rem] transition-colors hover:text-blue-400 hover:underline"
                 v-for="make in makes"
@@ -100,7 +100,7 @@ function onPriceSubmit() {
          @click="updateModal('price')">{{ priceRangeText }}</p>
       <form v-if="modal.price"
             @submit.prevent="onPriceSubmit"
-            class="absolute left-56 top-1 border shadow p-5 -m-1 bg-white">
+            class="absolute left-56 top-1 border shadow p-5 -m-1 bg-white z-50">
         <input type="number"
                placeholder="Min"
                v-model="priceRange.min"

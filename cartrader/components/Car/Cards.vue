@@ -1,7 +1,10 @@
 <script setup>
 import { useLocalStorage } from '@vueuse/core';
-
-const { cars } = useCars();
+defineProps({
+  cars: {
+    type: Array
+  }
+});
 
 const favorite = useLocalStorage('favorite', {});
 
