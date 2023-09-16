@@ -1,0 +1,20 @@
+POST http://localhost:3000/api/car/listings
+
+content-type: application/json
+
+{
+    "make": "Honda",
+    "model": "Civic",
+    "year": 1920,    
+    "miles": 1000,
+    "city": "Edmonton",
+    "numberOfSeats": 5,
+    "features": [
+        "Leather seats",
+        "Heated seats"
+    ],
+    "image": "www.google.com",
+    "listerId": "123",
+    "price": 25000,
+    "name": "Deepak"
+}
