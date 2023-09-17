@@ -13,6 +13,11 @@ const props = defineProps({
   }
 });
 
+const supabase = useSupabaseClient();
+const imagePath = computed(() => supabase.storage
+  .from("images")
+  .getPublicUrl(props.car.image).data.publicUrl);
+
 const emit = defineEmits(["onFavoriteToggle"]);
 </script>
 
@@ -24,7 +29,7 @@ const emit = defineEmits(["onFavoriteToggle"]);
          :alt="!isFavorite ? 'Add to favorite' : 'Remove from favorites'">
     <div class="flex h-full"
          @click="navigateTo(`/car/${car.name}-${car.id}`)">
-      <NuxtImg :src="car.image"
+      <NuxtImg :src="imagePath"
                :alt="car.name"
                class="w-[300px] h-full" />
       <section class="p-4 flex flex-col">

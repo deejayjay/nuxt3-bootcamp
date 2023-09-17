@@ -5,6 +5,7 @@ definePageMeta({
 });
 
 const user = useSupabaseUser();
+
 const { data: listings } = await useFetch(`/api/car/listings/user/${user.value.id}`);
 
 const handleDelete = async (listingId) => {

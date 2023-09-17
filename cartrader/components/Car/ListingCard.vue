@@ -1,18 +1,21 @@
 <script setup>
 const props = defineProps({
-  listing: {
-    type: Object,
-    required: true
-  }
+  listing: Object
 });
 
 const emits = defineEmits(["onDelete"]);
+
+
+const supabase = useSupabaseClient();
+
+const imagePath = computed(() => supabase.storage.from("images").getPublicUrl(props.listing.image).data.publicUrl
+);
 </script>
 
 <template>
   <div class="shadow rounded overflow-hidden flex justify-between mb-4">
     <div class="flex">
-      <NuxtImg :src="listing.url"
+      <NuxtImg :src="imagePath"
                :alt="listing.name"
                class="w-80 mr-3 h-44" />
       <div class="p-3">

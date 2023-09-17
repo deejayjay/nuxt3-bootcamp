@@ -2,11 +2,16 @@
 const props = defineProps({
   car: Object
 });
+
+const supabase = useSupabaseClient();
+const imagePath = computed(() => supabase.storage
+  .from("images")
+  .getPublicUrl(props.car.image).data.publicUrl);
 </script>
 
 <template>
   <div class="mt-10">
-    <NuxtImg :src="car.image"
+    <NuxtImg :src="imagePath"
              :alt="car.name"
              class="w-full" />
     <h2 class="mt-10 text-4xl">{{ car.name }}</h2>

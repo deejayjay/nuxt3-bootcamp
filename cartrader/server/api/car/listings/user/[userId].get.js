@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   const { userId } = event.context.params;
 
-  return prisma.car.findMany({
+  const listings = await prisma.car.findMany({
     where: {
       listerId: userId
     },
@@ -16,4 +16,6 @@ export default defineEventHandler(async (event) => {
       price: true
     }
   });
+
+  return listings;
 });

@@ -7,6 +7,7 @@ definePageMeta({
 const { makes } = useCars();
 
 const user = useSupabaseUser();
+const supabase = useSupabaseClient();
 
 const info = useState('adInfo', () => {
   return {
@@ -19,7 +20,7 @@ const info = useState('adInfo', () => {
     seats: "",
     features: "",
     description: "",
-    image: "afasadsa"
+    image: null
   };
 });
 
@@ -85,6 +86,16 @@ const isButtonDisabled = computed(() => {
 
 
 const handleSubmit = async () => {
+  const fileName = crypto.randomUUID();
+  const { data: imageFromSupabase, error } = await supabase.storage
+    .from("images")
+    .upload(`public/${fileName}`, info.value.image);
+
+  if (error) {
+    errorMessage.value = error.message;
+    return;
+  }
+
   const body = {
     make: info.value.make,
     model: info.value.model,
@@ -97,7 +108,7 @@ const handleSubmit = async () => {
     features: info.value.features.split(',').map(feature => feature.trim()),
     name: `${info.value.make} ${info.value.model}`,
     listerId: user.value.id,
-    image: "asadasdas",
+    image: imageFromSupabase.path,
   };
 
   try {
@@ -107,6 +118,9 @@ const handleSubmit = async () => {
     });
     navigateTo("/profile/listings");
   } catch (error) {
+    await supabase.storage
+      .from("images")
+      .remove([`public/${fileName}`]);
     errorMessage.value = error.message;
   }
 };
