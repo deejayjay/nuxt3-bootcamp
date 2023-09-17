@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
   if (error) {
     throw createError({
       statusCode: 412,
-      message: error.message
+      statusMessage: error.message
     });
   }
 

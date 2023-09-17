@@ -5,6 +5,8 @@ const props = defineProps({
     required: true
   }
 });
+
+const emits = defineEmits(["onDelete"]);
 </script>
 
 <template>
@@ -22,7 +24,8 @@ const props = defineProps({
       <NuxtLink class="text-blue-400"
                 :to="`/profile/listings/view/${listing.id}`">View</NuxtLink>
       <button type="button"
-              class="text-red-400 ml-5">Delete</button>
+              class="text-red-400 ml-5"
+              @click="emits('onDelete', listing.id)">Delete</button>
     </div>
   </div>
 </template>

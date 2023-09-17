@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   if (!car) {
     throw createError({
       status: 404,
-      message: `Car with id ${id} not found`
+      statusMessage: `Car with id ${id} not found`
     });
   }
 

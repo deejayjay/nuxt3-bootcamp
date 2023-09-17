@@ -22,11 +22,7 @@ if (!car.value) {
 
 <template>
   <div v-if="car">
-    <CarDetailHero :name="car.name"
-                   :image-url="car.url"
-                   :price="car.price"
-                   :seats="car.seats"
-                   :miles="car.miles" />
+    <CarDetailHero :car="car" />
     <CarDetailAttributes :features="car.features" />
     <CarDetailDescription :description="car.description" />
     <CarDetailContact />

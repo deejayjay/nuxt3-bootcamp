@@ -6,19 +6,24 @@ definePageMeta({
 
 const { makes } = useCars();
 
+const user = useSupabaseUser();
+
 const info = useState('adInfo', () => {
   return {
-    make: '',
+    make: "",
     model: "",
     year: "",
     miles: "",
     price: "",
     city: "",
     seats: "",
+    features: "",
     description: "",
-    image: null
+    image: "afasadsa"
   };
 });
+
+const errorMessage = ref('');
 
 const onChangeInput = (data, name) => {
   info.value[name] = data;
@@ -39,29 +44,72 @@ const inputs = [
   },
   {
     id: 3,
+    title: 'Price *',
+    name: 'price',
+    placeholder: 'Ex: 10000',
+  },
+  {
+    id: 4,
     title: 'Miles *',
     name: 'miles',
     placeholder: 'Ex: 11000',
   },
   {
-    id: 4,
+    id: 5,
     title: 'City *',
     name: 'city',
     placeholder: 'Ex: Calgary',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Number of Seats *',
     name: 'seats',
     placeholder: 'Ex: 5',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Features *',
     name: 'features',
     placeholder: 'Ex: Heated Seats, Sunroof, Low Mileage',
   }
 ];
+
+const isButtonDisabled = computed(() => {
+  for (const key in info.value) {
+    if (!info.value[key]) {
+      return true;
+    }
+  }
+  return false;
+});
+
+
+const handleSubmit = async () => {
+  const body = {
+    make: info.value.make,
+    model: info.value.model,
+    year: parseInt(info.value.year),
+    miles: parseInt(info.value.miles),
+    price: parseInt(info.value.price),
+    city: info.value.city,
+    numberOfSeats: parseInt(info.value.seats),
+    description: info.value.description,
+    features: info.value.features.split(',').map(feature => feature.trim()),
+    name: `${info.value.make} ${info.value.model}`,
+    listerId: user.value.id,
+    image: "asadasdas",
+  };
+
+  try {
+    await $fetch("/api/car/listings", {
+      method: "POST",
+      body
+    });
+    navigateTo("/profile/listings");
+  } catch (error) {
+    errorMessage.value = error.message;
+  }
+};
 </script>
 
 <template>
@@ -69,7 +117,8 @@ const inputs = [
     <div class="mt-24">
       <h2 class="text-6xl">Create a New Listing</h2>
     </div>
-    <form class="shadow rounded p-3 mt-5 flex flex-wrap justify-between">
+    <form class="shadow rounded p-3 mt-5 flex flex-wrap justify-between"
+          @submit.prevent="handleSubmit">
       <CarAdSelect title="Make *"
                    name="make"
                    :options="makes"
@@ -86,6 +135,13 @@ const inputs = [
                      @change-input="onChangeInput" />
       <CarAdImage title="Image *"
                   @change-input="onChangeInput" />
+      <div>
+        <button type="submit"
+                class="bg-blue-400 text-white rounded py-2 px-7 mt-3 disabled:cursor-not-allowed"
+                :disabled="isButtonDisabled">Submit</button>
+        <p v-if="errorMessage"
+           class="mt-3 text-red-400">{{ errorMessage }}</p>
+      </div>
     </form>
   </div>
 </template>

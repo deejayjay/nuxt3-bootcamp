@@ -15,9 +15,11 @@ watch(() => $route.query, () => refresh());
 
 <template>
   <div>
-    <p v-if="cars && !cars.length"
-       class="text-red-600 text-center font-light mt-4 bg-red-200 rounded">No cars that match the search filter...</p>
-    <CarCards v-else
-              :cars="cars" />
+    <ClientOnly>
+      <p v-if="cars && !cars.length"
+         class="text-red-600 text-center font-light mt-4 bg-red-200 rounded">No cars that match the search filter...</p>
+      <CarCards v-else
+                :cars="cars" />
+    </ClientOnly>
   </div>
 </template>
